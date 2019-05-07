@@ -79,17 +79,16 @@ void Quote::RunTest()
 	}
 
 	//查询所有品种信息
-	// iErr = m_pAPI->QryCommodity(&m_uiSessionID);
-	// if(TAPIERROR_SUCCEED != iErr) {
-	// 	cout << "QryCommodity Error:" << iErr <<endl;
-	// 	return;
-	// }
+	iErr = m_pAPI->QryCommodity(&m_uiSessionID);
+	if(TAPIERROR_SUCCEED != iErr) {
+		cout << "QryCommodity Error:" << iErr <<endl;
+		return;
+	}
 
 	//查询合约信息
 	TapAPICommodity stCommodity;
 	memset(&stCommodity, 0, sizeof(stCommodity));
 	APIStrncpy(stCommodity.ExchangeNo, DEFAULT_EXCHANGE_NO);
-
 	iErr = m_pAPI->QryContract(&m_uiSessionID, &stCommodity);
 	if(TAPIERROR_SUCCEED != iErr) {
 		cout << "QryContract Error:" << iErr <<endl;

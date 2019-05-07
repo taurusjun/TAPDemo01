@@ -72,6 +72,8 @@
             "label": "TapTradeAPI g++ build",
             "command": "/usr/bin/g++",
             "args": [
+                "-finput-charset=GB2312",
+                "-fexec-charset=GB2312",
                 "-ggdb",
                 "TapTradeAPI/Demo.cpp",
                 "${workspaceFolder}/Common/SimpleEvent.cpp",

@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     TAPIINT32 iResult = TAPIERROR_SUCCEED;
     TapAPIApplicationInfo stAppInfo;
     strcpy(stAppInfo.AuthCode, DEFAULT_AUTHCODE);
-	strcpy(stAppInfo.KeyOperationLogPath, "\\log");
+	strcpy(stAppInfo.KeyOperationLogPath, "log");
 
     ITapQuoteAPI *pAPI = CreateTapQuoteAPI(&stAppInfo, iResult);
     if (NULL == pAPI){
