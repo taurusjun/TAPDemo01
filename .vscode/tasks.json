@@ -3,47 +3,13 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {   
-            "type": "shell",
-            "label": "g++ pre-build common",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-c",
-                "Common/SimpleEvent.cpp",
-                "-o",
-                "dst/Common/SimpleEvent.o"
-            ],
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-        },
-        {   
-            "type": "shell",
-            "label": "g++ pre-build TapQuoteAPI",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-c",
-                "TapQuoteAPI/Quote.cpp",
-                "-o",
-                "dst/TapQuoteAPI/Quote.o",
-                "-I",
-                "${workspaceFolder}/api/include",
-            ],
-            "problemMatcher": [
-                "$gcc"
-            ],
-            // "dependsOn":[
-            //     "g++ pre-build common",
-            // ],
-            "group": "build",
-        },
         {
             "type": "shell",
             "label": "TapQuoteAPI g++ build",
             "command": "/usr/bin/g++",
             "args": [
                 "-ggdb",
+                "-finput-charset=GB2312",
                 "TapQuoteAPI/Demo.cpp",
                 "${workspaceFolder}/Common/SimpleEvent.cpp",
                 "${workspaceFolder}/TapQuoteAPI/Quote.cpp",
@@ -57,15 +23,7 @@
             ],
             "problemMatcher": [
                 "$gcc"
-            ],
-            // "group": {
-            //     "kind": "build",
-            //     "isDefault": true
-            // },
-            // "dependsOn":[
-            //     "g++ pre-build common",
-            //     "g++ pre-build TapQuoteAPI"
-            // ]
+            ]
         },
         {
             "type": "shell",
@@ -73,7 +31,6 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-finput-charset=GB2312",
-                "-fexec-charset=GB2312",
                 "-ggdb",
                 "TapTradeAPI/Demo.cpp",
                 "${workspaceFolder}/Common/SimpleEvent.cpp",
@@ -92,10 +49,7 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            // "dependsOn":[
-            //     "g++ pre-build common"
-            // ]
+            }
         }
     ]
 }

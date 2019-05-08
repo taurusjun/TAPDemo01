@@ -79,21 +79,21 @@ void Quote::RunTest()
 	}
 
 	//查询所有品种信息
-	iErr = m_pAPI->QryCommodity(&m_uiSessionID);
-	if(TAPIERROR_SUCCEED != iErr) {
-		cout << "QryCommodity Error:" << iErr <<endl;
-		return;
-	}
+	// iErr = m_pAPI->QryCommodity(&m_uiSessionID);
+	// if(TAPIERROR_SUCCEED != iErr) {
+	// 	cout << "QryCommodity Error:" << iErr <<endl;
+	// 	return;
+	// }
 
 	//查询合约信息
-	TapAPICommodity stCommodity;
-	memset(&stCommodity, 0, sizeof(stCommodity));
-	APIStrncpy(stCommodity.ExchangeNo, DEFAULT_EXCHANGE_NO);
-	iErr = m_pAPI->QryContract(&m_uiSessionID, &stCommodity);
-	if(TAPIERROR_SUCCEED != iErr) {
-		cout << "QryContract Error:" << iErr <<endl;
-		return;
-	}
+	// TapAPICommodity stCommodity;
+	// memset(&stCommodity, 0, sizeof(stCommodity));
+	// APIStrncpy(stCommodity.ExchangeNo, DEFAULT_EXCHANGE_NO);
+	// iErr = m_pAPI->QryContract(&m_uiSessionID, &stCommodity);
+	// if(TAPIERROR_SUCCEED != iErr) {
+	// 	cout << "QryContract Error:" << iErr <<endl;
+	// 	return;
+	// }
 
         while(true) {
                 m_Event.WaitEvent();
@@ -105,8 +105,7 @@ void Quote::RunTest()
 void TAP_CDECL Quote::OnRspLogin(TAPIINT32 errorCode, const TapAPIQuotLoginRspInfo *info)
 {
 	if(TAPIERROR_SUCCEED == errorCode) {
-		cout << "Login success, wait for API initialization..." << endl;
-		// cout << "登录成功，等待API初始化..." << endl;
+		cout << "登录成功，等待API初始化..." << endl;
 		m_bIsAPIReady = true;
 
 	} else {
@@ -117,8 +116,7 @@ void TAP_CDECL Quote::OnRspLogin(TAPIINT32 errorCode, const TapAPIQuotLoginRspIn
 
 void TAP_CDECL Quote::OnAPIReady()
 {
-	// cout << "API初始化完成" << endl;
-	cout << "API initialization success" << endl;
+	cout << "API初始化完成" << endl;
 	m_Event.SignalEvent();	
 }
 
@@ -175,8 +173,7 @@ void TAP_CDECL Quote::OnRspSubscribeQuote(TAPIUINT32 sessionID, TAPIINT32 errorC
 	cout << __FUNCTION__ << " is called." << endl;
 	if (TAPIERROR_SUCCEED == errorCode)
 	{
-		// cout << "行情订阅成功 ";
-		cout << "Subscribed successfully ";
+		cout << "行情订阅成功 ";
 		if (NULL != info)
 		{
 			cout << info->DateTimeStamp << " "
@@ -204,8 +201,7 @@ void TAP_CDECL Quote::OnRtnQuote(const TapAPIQuoteWhole *info)
 	cout << __FUNCTION__ << " is called." << endl;
 	if (NULL != info)
 	{
-		// cout << "行情更新:" 
-		cout << "Quote data updated:" 
+		cout << "行情更新:" 
 			<< info->DateTimeStamp << " "
 			<< info->Contract.Commodity.ExchangeNo << " "
 			<< info->Contract.Commodity.CommodityType << " "

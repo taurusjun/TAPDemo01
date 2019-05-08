@@ -35,7 +35,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/dst/TapTradeAPI/Demo.out",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [
                 {
