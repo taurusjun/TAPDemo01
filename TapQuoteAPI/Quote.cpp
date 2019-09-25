@@ -72,6 +72,7 @@ void Quote::RunTest()
 	stContract.CallOrPutFlag1 = TAPI_CALLPUT_FLAG_NONE;
 	stContract.CallOrPutFlag2 = TAPI_CALLPUT_FLAG_NONE;
 	m_uiSessionID = 0;
+
 	iErr = m_pAPI->SubscribeQuote(&m_uiSessionID, &stContract);
 	if(TAPIERROR_SUCCEED != iErr) {
 		cout << "SubscribeQuote Error:" << iErr <<endl;
