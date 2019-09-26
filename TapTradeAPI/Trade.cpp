@@ -81,12 +81,18 @@ void Trade::RunTest()
 	stNewOrder.TimeInForce = TAPI_ORDER_TIMEINFORCE_GFD;		
 	strcpy(stNewOrder.ExpireTime, "");		
 	stNewOrder.IsRiskOrder = APIYNFLAG_NO;		
-	stNewOrder.OrderSide = DEFAULT_ORDER_SIDE;			
-	stNewOrder.PositionEffect = DEFAULT_POSITION_EFFECT;	
+	// stNewOrder.OrderSide = DEFAULT_ORDER_SIDE; //多
+	stNewOrder.OrderSide = DEFAULT_ORDER_SIDE_SELL; //空
+				
+	stNewOrder.PositionEffect = DEFAULT_POSITION_EFFECT;//开仓
+	// stNewOrder.PositionEffect = DEFAULT_POSITION_EFFECT_COVER;//平仓
+
 	stNewOrder.PositionEffect2 = TAPI_PositionEffect_NONE;	
 	strcpy(stNewOrder.InquiryNo,"");			
 	stNewOrder.HedgeFlag = TAPI_HEDGEFLAG_T;			
 	stNewOrder.OrderPrice = DEFAULT_ORDER_PRICE;		
+	// stNewOrder.OrderPrice = 3840;		
+
 	stNewOrder.OrderPrice2;		
 	stNewOrder.StopPrice;			
 	stNewOrder.OrderQty = DEFAULT_ORDER_QTY;			
@@ -96,8 +102,13 @@ void Trade::RunTest()
 	stNewOrder.RefInt;				
 	stNewOrder.RefString;			
 	stNewOrder.TacticsType = TAPI_TACTICS_TYPE_NONE;		
-	stNewOrder.TriggerCondition = TAPI_TRIGGER_CONDITION_NONE;	
-	stNewOrder.TriggerPriceType = TAPI_TRIGGER_PRICE_NONE;	
+
+	// stNewOrder.TriggerCondition = TAPI_TRIGGER_CONDITION_NONE;	
+	stNewOrder.TriggerCondition = TAPI_TRIGGER_CONDITION_LITTLE;	
+
+	// stNewOrder.TriggerPriceType = TAPI_TRIGGER_PRICE_NONE;	
+	stNewOrder.TriggerPriceType = TAPI_TRIGGER_PRICE_LAST;	
+
 	stNewOrder.AddOneIsValid = APIYNFLAG_NO;	
 	stNewOrder.OrderQty2;
 	stNewOrder.HedgeFlag2 = TAPI_HEDGEFLAG_NONE;
@@ -111,6 +122,22 @@ void Trade::RunTest()
 		return;
 	}
 
+	//
+	// TapAPIAccQryReq stQryReq;
+	// memset(&stQryReq, 0, sizeof(stQryReq));
+	// iErr = m_pAPI->QryAccount(&m_uiSessionID,&stQryReq);
+	// if(TAPIERROR_SUCCEED != iErr) {
+	// 	cout << "QryAccount Error:" << iErr <<endl;
+	// 	return;
+	// }
+
+	//
+	// iErr = m_pAPI->QryCommodity(&m_uiSessionID);
+	// if(TAPIERROR_SUCCEED != iErr) {
+	// 	cout << "QryCommodity Error:" << iErr <<endl;
+	// 	return;
+	// }
+	
 
 	while (true)
 	{
@@ -181,6 +208,11 @@ void TAP_CDECL Trade::OnRspQryExchange( TAPIUINT32 sessionID, TAPIINT32 errorCod
 void TAP_CDECL Trade::OnRspQryCommodity( TAPIUINT32 sessionID, TAPIINT32 errorCode, TAPIYNFLAG isLast, const TapAPICommodityInfo *info )
 {
 	cout << __FUNCTION__ << " is called." << endl;
+	cout << ""
+		<< "CommodityName:"<<info->CommodityName << ","
+		<< "CommodityNo:"<<info->CommodityNo << ","
+		<< "ExchangeNo:"<<info->ExchangeNo
+		<<endl;
 }
 
 void TAP_CDECL Trade::OnRspQryContract( TAPIUINT32 sessionID, TAPIINT32 errorCode, TAPIYNFLAG isLast, const TapAPITradeContractInfo *info )
@@ -214,7 +246,9 @@ void TAP_CDECL Trade::OnRtnOrder( const TapAPIOrderInfoNotice *info )
 				} else{
 					cout << "报单成功，"
 						<< "状态:"<<info->OrderInfo->OrderState << ","
-						<< "委托编号:"<<info->OrderInfo->OrderNo
+						<< "委托编号:"<<info->OrderInfo->OrderNo << ","
+						<< "成交价格:"<<info->OrderInfo->OrderMatchPrice << ","
+						<< "成交手数:"<<info->OrderInfo->OrderMatchQty
 						<<endl;
 				}
 				m_Event.SignalEvent();
