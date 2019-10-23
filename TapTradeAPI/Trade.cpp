@@ -98,6 +98,7 @@ void Trade::RunTest()
 	stNewOrder.OrderPrice2;		
 	stNewOrder.StopPrice = 13000;			
 	stNewOrder.OrderQty = DEFAULT_ORDER_QTY;			
+	// stNewOrder.OrderQty = 10000;			
 	stNewOrder.OrderMinQty ;		
 	stNewOrder.MinClipSize;		
 	stNewOrder.MaxClipSize;		
@@ -122,11 +123,11 @@ void Trade::RunTest()
 	
 	m_uiSessionID = 0;
 
-	// iErr = m_pAPI->InsertOrder(&m_uiSessionID, &stNewOrder);
-	// if(TAPIERROR_SUCCEED != iErr) {
-	// 	cout << "InsertOrder Error:" << iErr <<endl;
-	// 	return;
-	// }
+	iErr = m_pAPI->InsertOrder(&m_uiSessionID, &stNewOrder);
+	if(TAPIERROR_SUCCEED != iErr) {
+		cout << "InsertOrder Error:" << iErr <<endl;
+		return;
+	}
 
 	// TapAPIOrderActivateReq stActiveOrder;
 	// memset(&stActiveOrder, 0, sizeof(stActiveOrder));
@@ -140,17 +141,17 @@ void Trade::RunTest()
 	// }
 
 	// m_uiSessionID2 = 0;
-	TapAPIOrderCancelReq stCancelOrder;
-	memset(&stCancelOrder, 0, sizeof(stCancelOrder));
-	strcpy(stCancelOrder.OrderNo,"OC191023UR00019103");
-	// strcpy(stCancelOrder.RefString,"TXQQ00000001");
-	// stCancelOrder.ServerFlag='C';
-	// stCancelOrder.RefInt=0;
-	iErr = m_pAPI->CancelOrder(&m_uiSessionID,&stCancelOrder);
-	if(TAPIERROR_SUCCEED != iErr) {
-		cout << "CancelOrder Error:" << iErr <<endl;
-		return;
-	}
+	// TapAPIOrderCancelReq stCancelOrder;
+	// memset(&stCancelOrder, 0, sizeof(stCancelOrder));
+	// strcpy(stCancelOrder.OrderNo,"OC191024UY0000507");
+	// // strcpy(stCancelOrder.RefString,"TXQQ00000001");
+	// // stCancelOrder.ServerFlag='C';
+	// // stCancelOrder.RefInt=0;
+	// iErr = m_pAPI->CancelOrder(&m_uiSessionID,&stCancelOrder);
+	// if(TAPIERROR_SUCCEED != iErr) {
+	// 	cout << "CancelOrder Error:" << iErr <<endl;
+	// 	return;
+	// }
 
 	// TapAPIPositionQryReq stQryPosReq;
 	// memset(&stQryPosReq, 0, sizeof(stQryPosReq));
