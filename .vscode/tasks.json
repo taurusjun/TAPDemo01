@@ -40,6 +40,8 @@
                 "-I",
                 "${workspaceFolder}/api/include",
                 "-L${workspaceFolder}/api/lib",
+                "-L/usr/local/lib",
+                "-lboost_locale",
                 "-lTapTradeAPI",
                 "-lTapQuoteAPI"
             ],

@@ -40,7 +40,7 @@
             "environment": [
                 {
                     "name": "LD_LIBRARY_PATH",
-                    "value": "./api/lib"
+                    "value": "./api/lib:/usr/local/lib:${LD_LIBRARY_PATH}"
                 }
             ],
             // "additionalSOLibSearchPath": "${workspaceFolder}/api/lib",
