@@ -51,6 +51,8 @@ void Trade::RunTest()
 	memset(&stLoginAuth, 0, sizeof(stLoginAuth));
 	strcpy(stLoginAuth.UserNo, DEFAULT_USERNAME);
 	strcpy(stLoginAuth.Password, DEFAULT_PASSWORD);
+	strcpy(stLoginAuth.AuthCode,"Demo_TestCollect");
+	strcpy(stLoginAuth.AppID,"Demo_TestCollect");
 	stLoginAuth.ISModifyPassword = APIYNFLAG_NO;
 	stLoginAuth.ISDDA = APIYNFLAG_NO;
 	iErr = m_pAPI->Login(&stLoginAuth);
@@ -503,3 +505,7 @@ void TAP_CDECL Trade::OnRspAccountRentInfo(TAPIUINT32 sessionID, TAPIINT32 error
 	}
 }
 
+void TAP_CDECL Trade::OnRspSubmitUserLoginInfo(TAPIUINT32 sessionID, TAPIINT32 errorCode, TAPIYNFLAG isLast, const TapAPISubmitUserLoginRspInfo * info)
+{
+
+}

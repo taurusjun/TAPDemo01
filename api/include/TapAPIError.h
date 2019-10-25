@@ -51,9 +51,14 @@ const int TAPIERROR_UDP_LISTENING                                      = -19;
 const int TAPIERROR_NotImplemented                                     = -20;
 //! 每次登陆只允许调用一次
 const int TAPIERROR_CallOneTimeOnly                                    = -21;
-//! 查询频率太高
+//! 操作频率太高
 const int TAPIERROR_Frequently                                         = -22;
-
+//! 信息采集错误
+const int TAPIERROR_DataCollect                                        = -23;
+//! 信息采集库加载失败
+const int TAPIERROR_DataLoad                                           = -24;
+//! 非中继模式禁止调用该接口
+const int TAPIERROR_NoRelay                                            = -25;
 /** @}*/
 
 
@@ -209,6 +214,12 @@ const int TAPIERROR_LOGIN_ERROR_AUTHTYPE                               = 10016;
 const int TAPIERROR_LOGIN_ERROR_AUTHEXPIRED                            = 10017;
 //! 登录用户密码超过有效天数
 const int TAPIERROR_LOGIN_ERROR_PASSWDEXPIRED                          = 10018;
+//! 登录用户未授权的登录IP和MAC
+const int TAPIERROR_LOGIN_ERROR_USERTRUST                              = 10019;
+//! 8.2客户端禁止登录请升级8.3
+const int TAPIERROR_LOGIN_ERROR_CLIENTVERSION                          = 10020;
+//! 用户授权信息错误
+const int TAPIERROR_LOGIN_ERROR_AUTHCODEINFO                           = 10021;
 
 /** @}*/
 
@@ -246,6 +257,14 @@ const int TAPIERROR_COMMODITYORDERTYPE_QRY                             = 25501;
 const int TAPIERROR_ORDERTIMEINFORCE_QRY                               = 25601;
 //! 用户下单频率查询失败
 const int TAPIERROR_USER_ORDER_FREQUENCE_QRY                           = 28901;
+//! 提交信息用户授权类型错误
+const int TAPIERROR_USERSUBMITAUTHTYPE_ERROR                           = 29591;
+//! 用户采集终端数据为空
+const int TAPIERROR_USERSUBMITINFO_EMPTY                               = 29592;
+//! 用户密钥版本错误
+const int TAPIERROR_USERAUTHKEYVERSION_ERROR                           = 29593;
+//! 用户采集信息不全，权限不够
+const int TAPIERROR_USERSUBMITINFO_PARTY                               = 29594;
 
 /** @}*/
 
@@ -311,6 +330,8 @@ const int TAPIERROR_ORDERDELETE_NOT_SYSNO                              = 60061;
 const int TAPIERROR_ORDERDELETE_NOT_STATE                              = 60062;
 //! 此状态不允许激活
 const int TAPIERROR_ORDERACTIVE_NOT_STATE                              = 60063;
+//! 只允许撤销本合约最新一次委托
+const int TAPIERROR_ORDERDELETE_NOT_LAST                                = 60064;
 //! 此状态禁止审核
 const int TAPIERROR_ORDERCHECK_NOT_STATE                               = 60071;
 //! 订单审核失败
@@ -347,6 +368,12 @@ const int TAPIERROR_POSITION_CANNOT_EXEC_OR_ABANDON                    = 60109;
 const int TAPIERROR_ORDERCHECK_NO_PERMIT                               = 60110;
 //! 超过当日最大开仓量
 const int TAPIERROR_ORDERMAXOPENVOL_NO_PERMIT                          = 60111;
+//! 涨跌停附近禁止反向开仓
+const int TAPIERROR_ORDERLIMIT_OPEN_NO_PERMIT                          = 60112;
+//! 超过单笔最大下单量
+const int TAPIERROR_ORDER_SINGLEVOL_NO_PERMIT                          = 60113;
+//! 超过最大持仓量
+const int TAPIERROR_ORDER_POSITIONVOL_NO_PERMIT                        = 60114;
 //! 非大连应价单不允许两笔委托量不一致
 const int TAPIERROR_ORDER_QTY_NO_PERMIT                                = 60115;
 //! 申请不允许重复提交
@@ -355,6 +382,14 @@ const int TAPIERROR_ORDER_APPLY_NO_PERMIT                              = 60117;
 const int TAPIERROR_ORDER_FREQ_OVERRUN                                 = 60118;
 //! 组合表不存在的组合方向或投保标志
 const int TAPIERROR_COMB_NO_SIDEORHEDGE                                = 60119;
+//! 当前期权存在合理价差不需要询价
+const int TAPIERROR_REQQUOTE_EXITREASONABLPRICE                        = 60120;
+//! 应价委托价格不合理
+const int TAPIERROR_RSPQUOTE_PRICE                                     = 60121;
+//! 普通客户不允许撤销强平单
+const int TAPIERROR_RISKORDER_CANCEL                                   = 60122;
+//! 应价委托开平标志不正确
+const int TAPIERROR_RSPQUOTE_EFFECT	                                   = 60123;
 //! 订单操作频率过高
 const int TAPIERROR_ORDER_FREQUENCY                                    = 61001;
 //! 委托查询返回前不能进行下次查询
@@ -382,6 +417,10 @@ const int TAPIERROR_SUBSCRIBEQUOTE_COMMODITY_NOT_EXIST                 = 72103;
 const int TAPIERROR_SUBSCRIBEQUOTE_CONTRACT_MAY_NOT_EXIST              = 72104;
 //! 不支持的行情协议
 const int TAPIERROR_QUOTEFRONT_UNKNOWN_PROTOCOL                        = 83001;
+//! 行情前置总登录数超限
+const int TAPIERROR_QUOTEFRONT_LOGIN_TOTALCOUNT                        = 83002;
+//! 订阅超过订阅数量限制
+const int TAPIERROR_QUOTEFRONT_SUB_COUNT                               = 83003;
 
 /** @}*/
 

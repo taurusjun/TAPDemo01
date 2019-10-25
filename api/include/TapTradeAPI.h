@@ -299,6 +299,16 @@ public:
 	* @ingroup G_T_AccountRentInfo
 	*/
 	virtual void TAP_CDECL OnRspAccountRentInfo(TAPIUINT32 sessionID,TAPIINT32 errorCode, TAPIYNFLAG isLast, const TapAPIAccountRentInfo * info)=0;
+	/**
+	* @brief 用户提交用户登录信息应答。(直连和中继用户都会收到应答)
+	* @param[in] sessionID 请求的会话ID；
+	* @param[in] errorCode 错误码。0 表示成功。
+	* @param[in] isLast 	标示是否是最后一批数据
+	* @param[in] info		指向返回的信息结构体。当errorCode不为0时，info为空。
+	* @attention  不要修改和删除info所指示的数据；函数调用结束，参数不再有效。
+	* @ingroup G_T_UserInfo
+	*/
+	virtual void TAP_CDECL OnRspSubmitUserLoginInfo(TAPIUINT32 sessionID, TAPIINT32 errorCode, TAPIYNFLAG isLast, const TapAPISubmitUserLoginRspInfo * info) = 0;
 };
 
 //TapTradeAPI 对外功能接口。包含了用户可以调用的功能函数。
@@ -571,13 +581,23 @@ public:
 	* @brief	激活报单
 	* @details	激活挂起的报单。委托将可以重新开始触发成交。
 	* @param[out]	sessionID 返回请求的会话ID;
-	* @param[in]	order 激活的委托
+	* @param[in]	qryReq 激活的委托
 	* @retval 0 请求成功
 	* @retval 非0 错误码
 	* @operationtype 异步操作
 	* @ingroup G_T_TradeActions
 	*/
 	virtual TAPIINT32 TAP_CDECL ActivateOrder(TAPIUINT32 *sessionID, const TapAPIOrderActivateReq *qryReq) = 0;
+	/**
+	* @brief		中继用户提交用户登录信息。
+	* @details		登录成功后只有中继用户才能使用该函数。
+	* @param[out]	sessionID 返回请求的会话ID;
+	* @param[in]	qryReq 用户登录信息
+	* @retval		0 成功；非0 错误码
+	* @operationtype 异步操作
+	* @ingroup G_T_UserInfo
+	*/
+	virtual TAPIINT32 TAP_CDECL SubmitUserLoginInfo(TAPIUINT32 *sessionID, const TapAPISubmitUserLoginInfo* qryReq) = 0;
 };
 
 //-----------------------------TapTradeAPI导出函数------------------------------------

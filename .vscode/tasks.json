@@ -43,7 +43,8 @@
                 "-L/usr/local/lib",
                 "-lboost_locale",
                 "-lTapTradeAPI",
-                "-lTapQuoteAPI"
+                "-lTapQuoteAPI",
+                "-lTapDataCollectAPI"
             ],
             "problemMatcher": [
                 "$gcc"

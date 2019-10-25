@@ -640,6 +640,8 @@ const TAPIOrderQryTypeType TAPI_ORDER_QRY_TYPE_UNENDED			= 'U';
 struct TapAPITradeLoginAuth
 {
 	TAPISTR_20					UserNo;					///< 用户名
+	TAPISTR_50					AuthCode;				///< 授权码
+	TAPISTR_30					AppID;					///< 程序版本号
 	TAPIYNFLAG					ISModifyPassword;		///< 是否修改密码	
 	TAPISTR_20					Password;				///< 密码
 	TAPISTR_20					NewPassword;			///< 新密码
@@ -657,13 +659,36 @@ struct TapAPITradeLoginRspInfo
 	TAPISTR_20					QuoteTempPassword;				///< 行情临时密码
 	TAPISTR_50					ReservedInfo;					///< 预留信息
 	TAPISTR_40					LastLoginIP;					///< 上次登录IP
-	TAPIUINT32					LastLoginProt;					///< 上次登录端口
+	TAPIUINT32					LastLoginPort;					///< 上次登录端口
+	TAPISTR_500                 LastLoginInfo;                  ///< 上次登录信息
 	TAPIDATETIME				LastLoginTime;					///< 上次登录时间
 	TAPIDATETIME				LastLogoutTime;					///< 上次退出时间
 	TAPIDATE					TradeDate;						///< 当前交易日期
 	TAPIDATETIME				LastSettleTime;					///< 上次结算时间
 	TAPIDATETIME				StartTime;						///< 系统启动时间
 	TAPIDATETIME				InitTime;						///< 系统初始化时间
+	TAPIAuthTypeType			AuthType;						///< 用户授权类型
+	TAPIDATETIME				AuthDate;						///< 用户授权到期日
+};
+
+//! 登录采集信息
+struct TapAPISubmitUserLoginInfo
+{
+	TAPISTR_20					UserNo;								///< 登录用户名
+	TAPISTR_500					GatherInfo;							///< 用户终端信息
+	TAPISTR_40					ClientLoginIP;						///< 用户公网IP
+	TAPIUINT32					ClientLoginPort;					///< 用户公网Port
+	TAPIDATETIME				ClientLoginDateTime;				///< 用户登录时间
+	TAPISTR_30					ClientAppID;						///< 用户AppID
+	TAPIUINT32					AuthKeyVersion;						///< 用户终端信息加密密钥版本号
+};
+
+//! 登录采集信息应答
+struct TapAPISubmitUserLoginRspInfo
+{
+	TAPISTR_20					UserNo;								///< 登录用户名
+	TAPIUINT32					ErrorCode;				    		///< 错误码
+	TAPISTR_50                  ErrorText;                          ///< 错误信息
 };
 
 //! 账号相关信息查询请求

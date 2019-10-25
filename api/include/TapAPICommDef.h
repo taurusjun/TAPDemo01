@@ -164,7 +164,7 @@ const TAPICommodityType		TAPI_COMMODITY_TYPE_INDEX				= 'Z';
 const TAPICommodityType		TAPI_COMMODITY_TYPE_STOCK				= 'T';
 //! 现货延期
 const TAPICommodityType		TAPI_COMMODITY_TYPE_SPOT_TRADINGDEFER   = 'Y';
-//! 中金所对锁组合
+//! 对锁组合
 const TAPICommodityType		TAPI_COMMODITY_TYPE_FUTURE_LOCK	    	= 'J';
 //! 中金所EFP
 const TAPICommodityType		TAPI_COMMODITY_TYPE_EFP			    	= 'A';
@@ -188,6 +188,20 @@ const TAPICallOrPutFlagType		TAPI_CALLPUT_FLAG_PUT				= 'P';
 //! 无
 const TAPICallOrPutFlagType		TAPI_CALLPUT_FLAG_NONE				= 'N';
 
+/** @}*/
+
+//=============================================================================
+/**
+*	\addtogroup G_DATATYPE_T_TAPIAUTHTYPETYPE	授权登录类型
+*	@{
+*/
+//=============================================================================
+//! 授权登录类型
+typedef TAPICHAR				TAPIAuthTypeType;
+//! 直连
+const TAPIAuthTypeType			TAPI_AUTHTYPE_DIRECT = '1';
+//! 中继
+const TAPIAuthTypeType			TAPI_AUTHTYPE_RELAY  = '2';
 /** @}*/
 
 
