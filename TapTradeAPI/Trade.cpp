@@ -27,6 +27,10 @@ void Trade::SetAPI(ITapTradeAPI *pAPI)
 
 void Trade::RunTest()
 {
+	// string s("此状态不允许撤单");
+	// string s2= boost::locale::conv::from_utf<char>(s, "GB2312");
+	// cout <<"MSG Test:" << boost::locale::conv::to_utf<char>(s2, "GB2312") <<endl;
+
 	if(NULL == m_pAPI) {
 		cout << "Error: m_pAPI is NULL." << endl;
 		return;
@@ -123,11 +127,11 @@ void Trade::RunTest()
 	
 	m_uiSessionID = 0;
 
-	iErr = m_pAPI->InsertOrder(&m_uiSessionID, &stNewOrder);
-	if(TAPIERROR_SUCCEED != iErr) {
-		cout << "InsertOrder Error:" << iErr <<endl;
-		return;
-	}
+	// iErr = m_pAPI->InsertOrder(&m_uiSessionID, &stNewOrder);
+	// if(TAPIERROR_SUCCEED != iErr) {
+	// 	cout << "InsertOrder Error:" << iErr <<endl;
+	// 	return;
+	// }
 
 	// TapAPIOrderActivateReq stActiveOrder;
 	// memset(&stActiveOrder, 0, sizeof(stActiveOrder));
@@ -140,18 +144,17 @@ void Trade::RunTest()
 	// 	return;
 	// }
 
-	// m_uiSessionID2 = 0;
-	// TapAPIOrderCancelReq stCancelOrder;
-	// memset(&stCancelOrder, 0, sizeof(stCancelOrder));
+	TapAPIOrderCancelReq stCancelOrder;
+	memset(&stCancelOrder, 0, sizeof(stCancelOrder));
 	// strcpy(stCancelOrder.OrderNo,"OC191024UY0000507");
-	// // strcpy(stCancelOrder.RefString,"TXQQ00000001");
-	// // stCancelOrder.ServerFlag='C';
-	// // stCancelOrder.RefInt=0;
-	// iErr = m_pAPI->CancelOrder(&m_uiSessionID,&stCancelOrder);
-	// if(TAPIERROR_SUCCEED != iErr) {
-	// 	cout << "CancelOrder Error:" << iErr <<endl;
-	// 	return;
-	// }
+	strcpy(stCancelOrder.OrderNo,"TEST00001");
+	stCancelOrder.ServerFlag='C';
+	iErr = m_pAPI->CancelOrder(&m_uiSessionID,&stCancelOrder);
+	if(TAPIERROR_SUCCEED != iErr) {
+		cout << "CancelOrder Error:" << iErr <<endl;
+		return;
+	}
+	cout << "Cancel order called!" <<endl;
 
 	// TapAPIPositionQryReq stQryPosReq;
 	// memset(&stQryPosReq, 0, sizeof(stQryPosReq));
@@ -256,8 +259,8 @@ void TAP_CDECL Trade::OnRspQryFund( TAPIUINT32 sessionID, TAPIINT32 errorCode, T
 
 void TAP_CDECL Trade::OnRtnFund( const TapAPIFundData *info )
 {
-	cout << __FUNCTION__ << " is called." << endl;
-	printTapAPIFundData(info);
+	// cout << __FUNCTION__ << " is called." << endl;
+	// printTapAPIFundData(info);
 }
 
 void TAP_CDECL Trade::OnRspQryExchange( TAPIUINT32 sessionID, TAPIINT32 errorCode, TAPIYNFLAG isLast, const TapAPIExchangeInfo *info )
@@ -289,6 +292,7 @@ void TAP_CDECL Trade::OnRtnContract( const TapAPITradeContractInfo *info )
 
 void TAP_CDECL Trade::OnRtnOrder( const TapAPIOrderInfoNotice *info )
 {
+	cout << " ********** OnRtnOrder ***********" << endl;
 	cout << __FUNCTION__ << " is called." << endl;
 	if(NULL == info){
 		cout << "info is null" << endl;
@@ -420,9 +424,9 @@ void TAP_CDECL Trade::OnRtnClose( const TapAPICloseInfo *info )
 
 void TAP_CDECL Trade::OnRtnPositionProfit( const TapAPIPositionProfitNotice *info )
 {
-	cout << __FUNCTION__ << " is called." << endl;
-	cout << "isLast=" << info->IsLast <<": "<< endl;
-	printTapAPIPositionProfit(info->Data);
+	// cout << __FUNCTION__ << " is called." << endl;
+	// cout << "isLast=" << info->IsLast <<": "<< endl;
+	// printTapAPIPositionProfit(info->Data);
 }
 
 void TAP_CDECL Trade::OnRspQryDeepQuote(TAPIUINT32 sessionID, TAPIINT32 errorCode, TAPIYNFLAG isLast, const TapAPIDeepQuoteQryRsp *info)
